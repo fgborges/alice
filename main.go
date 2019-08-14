@@ -37,7 +37,7 @@ func main() {
 			Director: func(request *http.Request) {
 				for _, arg := range flag.Args() {
 					route := strings.Split(arg, ":")
-					pattern, port := route[0], route[1]
+					pattern, port := route[0]+"*", route[1]
 					if ok, _ := path.Match(pattern, request.Host); ok {
 						request.URL.Host = ":" + port
 						break
