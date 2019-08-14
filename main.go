@@ -24,14 +24,15 @@ import (
 	"net/http/httputil"
 	"path"
 	"strings"
+	"strconv"
 )
 
 func main() {
-	port := *flag.String("p", "80", "Port")
+	port := flag.Int("p", 80, "Port")
 	flag.Parse()
 
 	server := &http.Server{
-		Addr: ":" + port,
+		Addr: ":" + strconv.Itoa(*port),
 		Handler: &httputil.ReverseProxy{
 			Director: func(request *http.Request) {
 				for _, arg := range flag.Args() {
